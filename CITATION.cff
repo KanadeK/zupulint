@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use ZupuLint, please cite it."
+title: "ZupuLint: a privacy-first genealogy data linter"
+version: 0.1.0
+license: Apache-2.0
+repository-code: "https://github.com/KanadeK/zupulint"
+url: "https://kanadek.github.io/zupulint/"
+keywords:
+  - genealogy
+  - GEDCOM
+  - data quality
+  - privacy
+authors:
+  - name: KanadeK

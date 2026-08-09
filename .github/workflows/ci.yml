@@ -1,0 +1,57 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: corepack enable
+      - run: uv run python --version
+      - run: uv lock --check
+      - run: make bootstrap
+      - run: make verify
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verification-evidence
+          path: |
+            coverage.xml
+            coverage.json
+            apps/web/coverage/
+            playwright-report/
+          if-no-files-found: ignore
+          retention-days: 7
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t zupulint:ci .
+      - run: docker run --detach --rm --name zupulint-ci -p 127.0.0.1:8000:8000 --read-only --tmpfs /tmp --cap-drop ALL --security-opt no-new-privileges zupulint:ci
+      - run: |
+          for attempt in {1..30}; do
+            if docker inspect --format='{{.State.Health.Status}}' zupulint-ci | grep -q healthy; then
+              curl --fail --silent http://127.0.0.1:8000/health
+              exit 0
+            fi
+            sleep 1
+          done
+          docker logs zupulint-ci
+          exit 1
+      - if: always()
+        run: |
+          if docker container inspect zupulint-ci >/dev/null 2>&1; then
+            docker stop zupulint-ci
+          fi

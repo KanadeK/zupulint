@@ -1,0 +1,22 @@
+site_name: ZupuLint · 谱校
+site_url: https://kanadek.github.io/zupulint/
+repo_url: https://github.com/KanadeK/zupulint
+theme:
+  name: material
+  language: zh
+  features:
+    - navigation.sections
+    - content.code.copy
+nav:
+  - Home: index.md
+  - Getting started: getting-started.md
+  - Formats: formats.md
+  - Configuration: configuration.md
+  - Rules: rules.md
+  - Privacy: privacy.md
+  - Architecture: architecture.md
+  - Examples: examples.md
+  - CLI: cli.md
+  - Web UI: web-ui.md
+  - Contributing: contributing.md
+  - v0.1.0 release notes: release-notes-v0.1.0.md

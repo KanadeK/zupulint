@@ -1,0 +1,9 @@
+name: Feature request
+description: Suggest a privacy-preserving improvement
+body:
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+    validations:
+      required: true

@@ -1,0 +1,99 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "zupulint"
+version = "0.1.0"
+description = "A privacy-first linter for GEDCOM, family-tree data, and Chinese clan genealogy."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
+authors = [{ name = "KanadeK" }]
+dependencies = [
+  "fastapi>=0.115,<1",
+  "jinja2>=3.1,<4",
+  "networkx>=3.4,<4",
+  "openpyxl>=3.1,<4",
+  "pydantic>=2.10,<3",
+  "python-dateutil>=2.9,<3",
+  "python-multipart>=0.0.20,<1",
+  "pyyaml>=6.0,<7",
+  "rapidfuzz>=3.10,<4",
+  "typer>=0.15,<1",
+  "uvicorn>=0.34,<1",
+]
+
+[dependency-groups]
+dev = [
+  "hypothesis>=6.120,<7",
+  "httpx>=0.28,<1",
+  "jsonschema>=4.23,<5",
+  "mypy>=1.14,<2",
+  "mkdocs>=1.6,<2",
+  "mkdocs-material>=9.6,<10",
+  "cyclonedx-bom>=7.2,<8",
+  "pip-audit>=2.8,<3",
+  "pyinstaller>=6.12,<7",
+  "pytest>=9.0.3,<10",
+  "pytest-cov>=6.0,<7",
+  "ruff>=0.9,<1",
+  "types-networkx>=3.4,<4",
+  "types-openpyxl>=3.1,<4",
+  "types-PyYAML>=6.0,<7",
+  "types-python-dateutil>=2.9,<3",
+]
+
+[project.scripts]
+zupulint = "zupulint.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/zupulint"]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  "/.hypothesis",
+  "/.mypy_cache",
+  "/.pytest_cache",
+  "/.pytest-tmp",
+  "/.ruff_cache",
+  "/.venv",
+  "/apps/web/coverage",
+  "/apps/web/dist",
+  "/build",
+  "/coverage.json",
+  "/coverage.xml",
+  "/dist",
+  "/htmlcov",
+  "/node_modules",
+  "/playwright-report",
+  "/release-test-env",
+  "/site",
+  "/test-results",
+  "/*.spec",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q --basetemp=.pytest-tmp/runtime --cov=zupulint --cov-branch --cov-report=term-missing --cov-report=json:coverage.json --cov-report=xml:coverage.xml --cov-fail-under=85"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["zupulint"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501", "B008"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["zupulint"]
+ignore_missing_imports = true
+
+[tool.uv]
+default-groups = ["dev"]

@@ -1,0 +1,27 @@
+version: 1
+locale: zh-CN
+rules:
+  enabled: true
+  disabled: []
+  severity: {}
+chronology:
+  minimum_parent_age: 12
+  maximum_maternal_age: 60
+  maximum_paternal_age: 90
+  maximum_lifespan: 130
+  historical_people: []
+generation:
+  base_generation: 1
+  branch_generation_names:
+    main: [守, 浩, 绍, 中, 德, 承, 先, 启, 后, 贤]
+  ignore_names: []
+privacy:
+  redact_living_people: true
+  living_person_year_threshold: 110
+  expose_exact_birth_date: false
+  expose_contact_details: false
+report:
+  include_info: true
+  include_evidence: true
+  include_suggestions: true
+important_claims_require_sources: false

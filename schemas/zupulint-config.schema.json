@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kanadek.github.io/zupulint/schemas/zupulint-config.schema.json",
+  "title": "ZupuLint configuration",
+  "type": "object",
+  "required": ["version"],
+  "properties": {
+    "version": { "const": 1 },
+    "locale": { "enum": ["zh-CN", "en"] },
+    "rules": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "disabled": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "ZP001", "ZP002", "ZP003", "ZP004", "ZP005", "ZP006",
+              "ZP101", "ZP102", "ZP103", "ZP104", "ZP105",
+              "ZP201", "ZP202", "ZP203", "ZP204",
+              "ZP301", "ZP302", "ZP303", "ZP304", "ZP401",
+              "ZP501", "ZP502", "ZP503", "ZP601", "ZP602", "ZP603"
+            ]
+          }
+        },
+        "severity": {
+          "type": "object",
+          "propertyNames": {
+            "enum": [
+              "ZP001", "ZP002", "ZP003", "ZP004", "ZP005", "ZP006",
+              "ZP101", "ZP102", "ZP103", "ZP104", "ZP105",
+              "ZP201", "ZP202", "ZP203", "ZP204",
+              "ZP301", "ZP302", "ZP303", "ZP304", "ZP401",
+              "ZP501", "ZP502", "ZP503", "ZP601", "ZP602", "ZP603"
+            ]
+          },
+          "additionalProperties": { "enum": ["error", "warning", "info"] }
+        }
+      },
+      "additionalProperties": false
+    },
+    "chronology": {
+      "type": "object",
+      "properties": {
+        "minimum_parent_age": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "maximum_maternal_age": { "type": "integer", "minimum": 1, "maximum": 150 },
+        "maximum_paternal_age": { "type": "integer", "minimum": 1, "maximum": 150 },
+        "maximum_lifespan": { "type": "integer", "minimum": 1, "maximum": 500 },
+        "historical_people": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "generation": {
+      "type": "object",
+      "properties": {
+        "base_generation": { "type": "integer" },
+        "branch_generation_names": { "type": "object", "additionalProperties": { "type": "array", "items": { "type": "string" } } },
+        "ignore_names": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    },
+    "privacy": {
+      "type": "object",
+      "properties": {
+        "redact_living_people": { "type": "boolean" },
+        "living_person_year_threshold": { "type": "integer", "minimum": 1, "maximum": 300 },
+        "expose_exact_birth_date": { "type": "boolean" },
+        "expose_contact_details": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "report": {
+      "type": "object",
+      "properties": {
+        "include_info": { "type": "boolean" },
+        "include_evidence": { "type": "boolean" },
+        "include_suggestions": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "important_claims_require_sources": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kanadek.github.io/zupulint/schemas/zupulint-input.schema.json",
+  "title": "ZupuLint canonical input",
+  "type": "object",
+  "required": ["people", "relationships"],
+  "properties": {
+    "people": { "type": "array", "items": { "$ref": "#/$defs/person" } },
+    "relationships": { "type": "array", "items": { "$ref": "#/$defs/relationship" } },
+    "events": { "type": "array", "items": { "$ref": "#/$defs/event" } },
+    "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } },
+    "metadata": { "type": "object" }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "date": {
+      "oneOf": [
+        { "type": ["string", "null"] },
+        {
+          "type": "object",
+          "properties": {
+            "raw": { "type": ["string", "null"] },
+            "value": { "type": ["string", "null"], "format": "date" },
+            "end_value": { "type": ["string", "null"], "format": "date" },
+            "precision": { "enum": ["unknown", "year", "month", "day", "range", "unparsed"] },
+            "qualifier": { "enum": ["exact", "about", "calculated", "estimated", "before", "after", "between", "unknown"] }
+          },
+          "additionalProperties": true
+        }
+      ]
+    },
+    "person": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string" },
+        "names": { "type": "array", "items": { "type": "string" } },
+        "primary_name": { "type": ["string", "null"] },
+        "surname": { "type": ["string", "null"] },
+        "given_name": { "type": ["string", "null"] },
+        "generation_name": { "type": ["string", "null"] },
+        "courtesy_name": { "type": ["string", "null"] },
+        "alias": { "type": "array", "items": { "type": "string" } },
+        "sex": { "type": ["string", "null"] },
+        "birth": { "$ref": "#/$defs/date" },
+        "death": { "$ref": "#/$defs/date" },
+        "living": { "type": ["boolean", "null"] },
+        "places": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "array", "items": { "type": "string" } },
+        "sources": { "type": "array", "items": { "type": "string" } },
+        "privacy_level": { "type": "string" },
+        "branch": { "type": ["string", "null"] },
+        "generation": { "type": ["integer", "null"] },
+        "extensions": { "type": "object" }
+      },
+      "additionalProperties": true
+    },
+    "relationship": {
+      "type": "object",
+      "required": ["id", "type", "from_person_id", "to_person_id"],
+      "properties": {
+        "id": { "type": "string" },
+        "type": { "enum": ["biological_parent", "adoptive_parent", "step_parent", "guardian", "spouse", "partner", "adopted_child", "heir", "posthumous_heir", "uxorilocal", "chu_si", "cheng_si", "jian_tiao", "ru_zhui", "ji_si", "guo_ji"] },
+        "from_person_id": { "type": "string" },
+        "to_person_id": { "type": "string" },
+        "start_date": { "$ref": "#/$defs/date" },
+        "end_date": { "$ref": "#/$defs/date" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "sources": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "event": {
+      "type": "object",
+      "required": ["id", "person_id", "type"],
+      "properties": {
+        "id": { "type": "string" }, "person_id": { "type": "string" }, "type": { "type": "string" },
+        "date": { "$ref": "#/$defs/date" }, "place": { "type": ["string", "null"] },
+        "description": { "type": ["string", "null"] }, "sources": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": true
+    },
+    "source": {
+      "type": "object",
+      "required": ["id"],
+      "properties": {
+        "id": { "type": "string" }, "title": { "type": ["string", "null"] },
+        "type": { "type": ["string", "null"] }, "citation": { "type": ["string", "null"] },
+        "page": { "type": ["string", "null"] }, "url": { "type": ["string", "null"] },
+        "repository": { "type": ["string", "null"] }, "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      },
+      "additionalProperties": true
+    }
+  }
+}

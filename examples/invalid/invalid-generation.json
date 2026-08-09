@@ -1,0 +1,12 @@
+{
+  "metadata": {"fixture": "synthetic generation failures"},
+  "people": [
+    {"id": "G1", "primary_name": "守本", "generation": 1, "generation_name": "守", "branch": "main", "living": false},
+    {"id": "G2", "primary_name": "德错", "generation": 3, "generation_name": "德", "branch": "main", "living": false},
+    {"id": "G3", "primary_name": "浩旁", "generation": 4, "generation_name": "浩", "branch": "unconfigured", "living": false}
+  ],
+  "relationships": [
+    {"id": "generation-parent-1", "type": "biological_parent", "from_person_id": "G1", "to_person_id": "G2"},
+    {"id": "generation-parent-2", "type": "biological_parent", "from_person_id": "G1", "to_person_id": "G3"}
+  ]
+}

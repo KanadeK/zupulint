@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://kanadek.github.io/zupulint/schemas/zupulint-report.schema.json",
+  "title": "ZupuLint report",
+  "type": "object",
+  "required": ["version", "scan", "summary", "issues", "config"],
+  "properties": {
+    "version": { "type": "string" },
+    "scan": {
+      "type": "object", "required": ["time", "input"],
+      "properties": { "time": { "type": "string" }, "input": { "type": "object" } },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": ["people", "relationships", "issues", "by_severity", "by_rule"],
+      "properties": {
+        "people": { "type": "integer", "minimum": 0 },
+        "relationships": { "type": "integer", "minimum": 0 },
+        "issues": { "type": "integer", "minimum": 0 },
+        "by_severity": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+        "by_rule": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } }
+      },
+      "additionalProperties": false
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule_id", "severity", "category", "message", "person_ids", "relationship_ids", "source_location", "evidence", "suggestion", "confidence"],
+        "properties": {
+          "rule_id": { "type": "string", "pattern": "^ZP[0-9]{3}$" },
+          "severity": { "enum": ["error", "warning", "info"] },
+          "category": { "type": "string" }, "message": { "type": "string" },
+          "person_ids": { "type": "array", "items": { "type": "string" } },
+          "relationship_ids": { "type": "array", "items": { "type": "string" } },
+          "source_location": { "type": ["string", "null"] }, "evidence": { "type": "object" },
+          "suggestion": { "type": "string" }, "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "config": { "type": "object" }
+  },
+  "additionalProperties": false
+}

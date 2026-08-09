@@ -1,0 +1,234 @@
+{
+  "config": {
+    "chronology": {
+      "historical_people": [],
+      "maximum_lifespan": 130,
+      "maximum_maternal_age": 60,
+      "maximum_paternal_age": 90,
+      "minimum_parent_age": 12
+    },
+    "generation": {
+      "base_generation": 1,
+      "branch_generation_names": {
+        "main": [
+          "守",
+          "浩",
+          "绍",
+          "中",
+          "德",
+          "承",
+          "先",
+          "启",
+          "后",
+          "贤"
+        ]
+      },
+      "ignore_names": []
+    },
+    "important_claims_require_sources": false,
+    "locale": "zh-CN",
+    "privacy": {
+      "expose_contact_details": false,
+      "expose_exact_birth_date": false,
+      "living_person_year_threshold": 110,
+      "redact_living_people": true
+    },
+    "report": {
+      "include_evidence": true,
+      "include_info": true,
+      "include_suggestions": true
+    },
+    "rules": {
+      "disabled": [],
+      "enabled": true,
+      "severity": {}
+    },
+    "version": 1
+  },
+  "issues": [
+    {
+      "category": "structure",
+      "confidence": 1.0,
+      "evidence": {
+        "count": 2
+      },
+      "message": "Person ID '@I1@' occurs 2 times.",
+      "person_ids": [
+        "@I1@"
+      ],
+      "relationship_ids": [],
+      "rule_id": "ZP001",
+      "severity": "error",
+      "source_location": null,
+      "suggestion": "Assign a unique stable ID."
+    },
+    {
+      "category": "structure",
+      "confidence": 1.0,
+      "evidence": {
+        "missing_ids": [
+          "@I404@"
+        ]
+      },
+      "message": "Relationship '@FMISSING@:parent:@I404@:@I2@' references missing person(s): @I404@.",
+      "person_ids": [
+        "@I404@"
+      ],
+      "relationship_ids": [
+        "@FMISSING@:parent:@I404@:@I2@"
+      ],
+      "rule_id": "ZP002",
+      "severity": "error",
+      "source_location": null,
+      "suggestion": "Correct the reference or add the person."
+    },
+    {
+      "category": "structure",
+      "confidence": 1.0,
+      "evidence": {},
+      "message": "Relationship '@FSELF@:parent:@I1@:@I1@' relates '@I1@' to themselves.",
+      "person_ids": [
+        "@I1@"
+      ],
+      "relationship_ids": [
+        "@FSELF@:parent:@I1@:@I1@"
+      ],
+      "rule_id": "ZP003",
+      "severity": "error",
+      "source_location": null,
+      "suggestion": "Remove the self-reference."
+    },
+    {
+      "category": "structure",
+      "confidence": 1.0,
+      "evidence": {
+        "cycle": [
+          "@I1@",
+          "@I1@"
+        ]
+      },
+      "message": "Biological ancestry cycle: @I1@ -> @I1@.",
+      "person_ids": [
+        "@I1@"
+      ],
+      "relationship_ids": [
+        "@FSELF@:parent:@I1@:@I1@"
+      ],
+      "rule_id": "ZP004",
+      "severity": "error",
+      "source_location": null,
+      "suggestion": "Break the ancestral loop."
+    },
+    {
+      "category": "structure",
+      "confidence": 1.0,
+      "evidence": {
+        "cycle": [
+          "@I1@",
+          "@I2@",
+          "@I3@",
+          "@I1@"
+        ]
+      },
+      "message": "Biological ancestry cycle: @I1@ -> @I2@ -> @I3@ -> @I1@.",
+      "person_ids": [
+        "@I1@",
+        "@I2@",
+        "@I3@"
+      ],
+      "relationship_ids": [
+        "@F1@:parent:@I1@:@I2@",
+        "@F2@:parent:@I2@:@I3@",
+        "@F3@:parent:@I3@:@I1@"
+      ],
+      "rule_id": "ZP004",
+      "severity": "error",
+      "source_location": null,
+      "suggestion": "Break the ancestral loop."
+    },
+    {
+      "category": "structure",
+      "confidence": 1.0,
+      "evidence": {},
+      "message": "Relationship '@FSPOUSE2@:spouse:@I2@:@I1@' duplicates '@FSPOUSE1@:spouse:@I1@:@I2@'.",
+      "person_ids": [
+        "@I1@",
+        "@I2@"
+      ],
+      "relationship_ids": [
+        "@FSPOUSE1@:spouse:@I1@:@I2@",
+        "@FSPOUSE2@:spouse:@I2@:@I1@"
+      ],
+      "rule_id": "ZP005",
+      "severity": "warning",
+      "source_location": null,
+      "suggestion": "Keep one canonical relationship."
+    },
+    {
+      "category": "structure",
+      "confidence": 1.0,
+      "evidence": {
+        "types": [
+          "biological_parent",
+          "spouse"
+        ]
+      },
+      "message": "Conflicting roles for '@I1@' and '@I2@': biological_parent, spouse.",
+      "person_ids": [
+        "@I1@",
+        "@I2@"
+      ],
+      "relationship_ids": [
+        "@F1@:parent:@I1@:@I2@",
+        "@FSPOUSE1@:spouse:@I1@:@I2@",
+        "@FSPOUSE2@:spouse:@I2@:@I1@"
+      ],
+      "rule_id": "ZP006",
+      "severity": "warning",
+      "source_location": null,
+      "suggestion": "Review the pair's roles."
+    },
+    {
+      "category": "quality",
+      "confidence": 1.0,
+      "evidence": {
+        "parser": "input"
+      },
+      "message": "missing GEDCOM pointer(s) @I404@ in @FMISSING@:parent:@I404@:@I2@",
+      "person_ids": [],
+      "relationship_ids": [],
+      "rule_id": "ZP602",
+      "severity": "info",
+      "source_location": null,
+      "suggestion": "Use a supported date or retain an evidence note."
+    }
+  ],
+  "scan": {
+    "input": {
+      "format": "ged",
+      "name": "invalid-structure.ged",
+      "size": 529
+    },
+    "time": "2026-01-01T00:00:00+00:00"
+  },
+  "summary": {
+    "by_rule": {
+      "ZP001": 1,
+      "ZP002": 1,
+      "ZP003": 1,
+      "ZP004": 2,
+      "ZP005": 1,
+      "ZP006": 1,
+      "ZP602": 1
+    },
+    "by_severity": {
+      "error": 5,
+      "info": 1,
+      "warning": 2
+    },
+    "issues": 8,
+    "people": 4,
+    "relationships": 7
+  },
+  "version": "0.1.0"
+}

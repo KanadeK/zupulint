@@ -1,0 +1,51 @@
+0 HEAD
+1 CHAR UTF-8
+1 NOTE All names and identifiers in this file are fictional synthetic test data.
+0 @S1@ SOUR
+1 TITL Synthetic genealogy source
+1 TEXT Generated solely for ZupuLint examples.
+0 @I1@ INDI
+1 NAME 守源 /王/
+1 SEX M
+1 BIRT
+2 DATE 1900
+1 DEAT
+2 DATE 1970
+1 SOUR @S1@
+0 @I2@ INDI
+1 NAME 浩川 /王/
+1 SEX M
+1 BIRT
+2 DATE 1925
+1 DEAT
+2 DATE 1995
+1 SOUR @S1@
+0 @I3@ INDI
+1 NAME 绍林 /王/
+1 SEX M
+1 BIRT
+2 DATE 1950
+1 DEAT
+2 DATE 2020
+1 SOUR @S1@
+0 @I4@ INDI
+1 NAME 中岳 /王/
+1 SEX M
+1 BIRT
+2 DATE 1975
+1 DEAT
+2 DATE 2025
+1 SOUR @S1@
+0 @F1@ FAM
+1 HUSB @I1@
+1 CHIL @I2@
+1 SOUR @S1@
+0 @F2@ FAM
+1 HUSB @I2@
+1 CHIL @I3@
+1 SOUR @S1@
+0 @F3@ FAM
+1 HUSB @I3@
+1 CHIL @I4@
+1 SOUR @S1@
+0 TRLR

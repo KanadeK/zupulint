@@ -1,0 +1,35 @@
+0 HEAD
+1 CHAR UTF-8
+1 NOTE All names and identifiers in this file are fictional synthetic test data.
+0 @I1@ INDI
+1 NAME 环一 /王/
+1 BIRT
+2 DATE 1900
+0 @I1@ INDI
+1 NAME 环一重复 /王/
+0 @I2@ INDI
+1 NAME 环二 /王/
+0 @I3@ INDI
+1 NAME 环三 /王/
+0 @F1@ FAM
+1 HUSB @I1@
+1 CHIL @I2@
+0 @F2@ FAM
+1 HUSB @I2@
+1 CHIL @I3@
+0 @F3@ FAM
+1 HUSB @I3@
+1 CHIL @I1@
+0 @FMISSING@ FAM
+1 HUSB @I404@
+1 CHIL @I2@
+0 @FSELF@ FAM
+1 HUSB @I1@
+1 CHIL @I1@
+0 @FSPOUSE1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+0 @FSPOUSE2@ FAM
+1 HUSB @I2@
+1 WIFE @I1@
+0 TRLR

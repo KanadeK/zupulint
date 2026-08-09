@@ -1,0 +1,149 @@
+{
+  "config": {
+    "chronology": {
+      "historical_people": [],
+      "maximum_lifespan": 130,
+      "maximum_maternal_age": 60,
+      "maximum_paternal_age": 90,
+      "minimum_parent_age": 12
+    },
+    "generation": {
+      "base_generation": 1,
+      "branch_generation_names": {
+        "main": [
+          "守",
+          "浩",
+          "绍",
+          "中",
+          "德",
+          "承",
+          "先",
+          "启",
+          "后",
+          "贤"
+        ]
+      },
+      "ignore_names": []
+    },
+    "important_claims_require_sources": false,
+    "locale": "zh-CN",
+    "privacy": {
+      "expose_contact_details": false,
+      "expose_exact_birth_date": false,
+      "living_person_year_threshold": 110,
+      "redact_living_people": true
+    },
+    "report": {
+      "include_evidence": true,
+      "include_info": true,
+      "include_suggestions": true
+    },
+    "rules": {
+      "disabled": [],
+      "enabled": true,
+      "severity": {}
+    },
+    "version": 1
+  },
+  "issues": [
+    {
+      "category": "adoption",
+      "confidence": 1.0,
+      "evidence": {},
+      "message": "'B' has the same parent recorded as biological and successor/adoptive.",
+      "person_ids": [
+        "A",
+        "A",
+        "B"
+      ],
+      "relationship_ids": [
+        "adopt",
+        "bio"
+      ],
+      "rule_id": "ZP301",
+      "severity": "warning",
+      "source_location": null,
+      "suggestion": "Preserve both roles with separate relationships."
+    },
+    {
+      "category": "adoption",
+      "confidence": 1.0,
+      "evidence": {
+        "direction": [
+          "B",
+          "C"
+        ]
+      },
+      "message": "Succession direction 'B' -> 'C' lacks matching chu-si/cheng-si record.",
+      "person_ids": [
+        "B",
+        "C"
+      ],
+      "relationship_ids": [],
+      "rule_id": "ZP302",
+      "severity": "error",
+      "source_location": null,
+      "suggestion": "Correct source and target succession families."
+    },
+    {
+      "category": "adoption",
+      "confidence": 1.0,
+      "evidence": {},
+      "message": "'D' has incompatible inheritance identities.",
+      "person_ids": [
+        "B",
+        "C",
+        "D"
+      ],
+      "relationship_ids": [
+        "heir",
+        "posthumous"
+      ],
+      "rule_id": "ZP303",
+      "severity": "warning",
+      "source_location": null,
+      "suggestion": "Keep one inheritance identity per target."
+    },
+    {
+      "category": "adoption",
+      "confidence": 1.0,
+      "evidence": {},
+      "message": "Jian-tiao for 'B' has fewer than two successor branches.",
+      "person_ids": [
+        "B",
+        "C"
+      ],
+      "relationship_ids": [
+        "jian"
+      ],
+      "rule_id": "ZP304",
+      "severity": "warning",
+      "source_location": null,
+      "suggestion": "Record both linked branches or heirs."
+    }
+  ],
+  "scan": {
+    "input": {
+      "format": "json",
+      "name": "invalid-adoption.json",
+      "size": 898
+    },
+    "time": "2026-01-01T00:00:00+00:00"
+  },
+  "summary": {
+    "by_rule": {
+      "ZP301": 1,
+      "ZP302": 1,
+      "ZP303": 1,
+      "ZP304": 1
+    },
+    "by_severity": {
+      "error": 1,
+      "warning": 3
+    },
+    "issues": 4,
+    "people": 4,
+    "relationships": 6
+  },
+  "version": "0.1.0"
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ZupuLint">
+  <rect width="64" height="64" rx="12" fill="#f5f1e8"/>
+  <path d="M16 14h32v36H16z" fill="#fffdf8" stroke="#342f2c" stroke-width="3"/>
+  <path d="M23 24h18M23 32h18M23 40h11" stroke="#a64032" stroke-width="4" stroke-linecap="round"/>
+  <path d="m38 42 4 4 8-10" fill="none" stroke="#236b57" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

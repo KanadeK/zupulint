@@ -1,0 +1,15 @@
+{
+  "metadata": {"fixture": "synthetic chronology failures"},
+  "people": [
+    {"id": "C1", "primary_name": "倒置甲", "birth": "1900", "death": "1890", "living": false, "sources": ["synthetic-source"]},
+    {"id": "P1", "primary_name": "晚生父", "birth": "1950", "death": "2020", "living": false, "sources": ["synthetic-source"]},
+    {"id": "C2", "primary_name": "早生子", "birth": "1940", "death": "2010", "living": false, "sources": ["synthetic-source"]},
+    {"id": "S1", "primary_name": "婚配甲", "birth": "1800", "death": "1870", "living": false, "sources": ["synthetic-source"]},
+    {"id": "S2", "primary_name": "婚配乙", "birth": "1810", "death": "1880", "living": false, "sources": ["synthetic-source"]},
+    {"id": "L1", "primary_name": "长寿例", "birth": "1600", "death": "1760", "living": false, "sources": ["synthetic-source"]}
+  ],
+  "relationships": [
+    {"id": "chron-parent", "type": "biological_parent", "from_person_id": "P1", "to_person_id": "C2"},
+    {"id": "chron-spouse", "type": "spouse", "from_person_id": "S1", "to_person_id": "S2", "start_date": "1900", "end_date": "1890"}
+  ]
+}

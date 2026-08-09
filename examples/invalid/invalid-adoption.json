@@ -1,0 +1,17 @@
+{
+  "metadata": {"fixture": "synthetic adoption and succession failures"},
+  "people": [
+    {"id": "A", "primary_name": "合成甲", "living": false},
+    {"id": "B", "primary_name": "合成乙", "living": false},
+    {"id": "C", "primary_name": "合成丙", "living": false},
+    {"id": "D", "primary_name": "合成丁", "living": false}
+  ],
+  "relationships": [
+    {"id": "bio", "type": "biological_parent", "from_person_id": "A", "to_person_id": "B"},
+    {"id": "adopt", "type": "adoptive_parent", "from_person_id": "A", "to_person_id": "B"},
+    {"id": "chu", "type": "chu_si", "from_person_id": "B", "to_person_id": "C"},
+    {"id": "heir", "type": "heir", "from_person_id": "B", "to_person_id": "D"},
+    {"id": "posthumous", "type": "posthumous_heir", "from_person_id": "C", "to_person_id": "D"},
+    {"id": "jian", "type": "jian_tiao", "from_person_id": "B", "to_person_id": "C"}
+  ]
+}

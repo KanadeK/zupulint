@@ -1,0 +1,74 @@
+name: Release
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: write
+jobs:
+  binaries:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            artifact: zupulint-windows-x64
+          - os: ubuntu-latest
+            artifact: zupulint-linux-x64
+          - os: macos-latest
+            artifact: zupulint-macos
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - run: uv sync --frozen --all-extras --dev
+      - run: uv run pyinstaller --onefile --name zupulint --collect-data zupulint src/zupulint/__main__.py
+      - run: uv run python scripts/smoke_binary.py
+      - run: uv run python scripts/package_binary.py
+        env:
+          ZUPULINT_ARTIFACT: ${{ matrix.artifact }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist/${{ matrix.artifact }}.zip
+  release:
+    needs: binaries
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+          enable-cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: corepack enable
+      - run: make bootstrap
+      - run: uv lock --check
+      - run: make verify
+      - run: uv run python scripts/package_release.py
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          pattern: zupulint-*
+          merge-multiple: true
+      - run: uv run python scripts/write_checksums.py dist
+      - run: test "$(git rev-list -n 1 "$GITHUB_REF_NAME")" = "$(git rev-parse origin/main)"
+      - run: test "$(uv run python -c 'import zupulint; print(zupulint.__version__)')" = "${GITHUB_REF_NAME#v}"
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: ZupuLint ${{ github.ref_name }}
+          body_path: docs/release-notes-v0.1.0.md
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: |
+            dist/*.whl
+            dist/*.tar.gz
+            dist/*.zip
+            dist/SHA256SUMS.txt
+            dist/SBOM.json
+            dist/zupulint-default.yml

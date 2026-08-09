@@ -1,0 +1,2 @@
+id,name,birth,living,phone,email,national_id,address,dna,privacy_level,notes
+L1,合成成员,2012-01-02,true,13800000000,synthetic@example.invalid,11000020120102001X,合成省合成市合成路一号一室,DNA synthetic sequence,public,完全虚构的隐私测试数据

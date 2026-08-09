@@ -1,0 +1,5 @@
+id,name,birth,death,living,parents,spouse,source
+P1,守安王,1750,1810,false,,P2,fictional-source
+P2,守宁李,1755,1820,false,,P1,fictional-source
+P3,浩文王,1775,1845,false,P1;P2,P5,fictional-source
+P4,浩武王,1780,1850,false,P1;P2,P8,fictional-source

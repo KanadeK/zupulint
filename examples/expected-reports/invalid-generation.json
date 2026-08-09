@@ -1,0 +1,154 @@
+{
+  "config": {
+    "chronology": {
+      "historical_people": [],
+      "maximum_lifespan": 130,
+      "maximum_maternal_age": 60,
+      "maximum_paternal_age": 90,
+      "minimum_parent_age": 12
+    },
+    "generation": {
+      "base_generation": 1,
+      "branch_generation_names": {
+        "main": [
+          "守",
+          "浩",
+          "绍",
+          "中",
+          "德",
+          "承",
+          "先",
+          "启",
+          "后",
+          "贤"
+        ]
+      },
+      "ignore_names": []
+    },
+    "important_claims_require_sources": false,
+    "locale": "zh-CN",
+    "privacy": {
+      "expose_contact_details": false,
+      "expose_exact_birth_date": false,
+      "living_person_year_threshold": 110,
+      "redact_living_people": true
+    },
+    "report": {
+      "include_evidence": true,
+      "include_info": true,
+      "include_suggestions": true
+    },
+    "rules": {
+      "disabled": [],
+      "enabled": true,
+      "severity": {}
+    },
+    "version": 1
+  },
+  "issues": [
+    {
+      "category": "generation",
+      "confidence": 1.0,
+      "evidence": {},
+      "message": "Generation jump between 'G1' (1) and 'G2' (3).",
+      "person_ids": [
+        "G1",
+        "G2"
+      ],
+      "relationship_ids": [
+        "generation-parent-1"
+      ],
+      "rule_id": "ZP201",
+      "severity": "warning",
+      "source_location": null,
+      "suggestion": "Correct the generation numbers."
+    },
+    {
+      "category": "generation",
+      "confidence": 1.0,
+      "evidence": {},
+      "message": "Generation jump between 'G1' (1) and 'G3' (4).",
+      "person_ids": [
+        "G1",
+        "G3"
+      ],
+      "relationship_ids": [
+        "generation-parent-2"
+      ],
+      "rule_id": "ZP201",
+      "severity": "warning",
+      "source_location": null,
+      "suggestion": "Correct the generation numbers."
+    },
+    {
+      "category": "generation",
+      "confidence": 1.0,
+      "evidence": {},
+      "message": "Children of 'G1' span generations [3, 4].",
+      "person_ids": [
+        "G1",
+        "G2",
+        "G3"
+      ],
+      "relationship_ids": [],
+      "rule_id": "ZP202",
+      "severity": "warning",
+      "source_location": null,
+      "suggestion": "Review sibling generation assignments."
+    },
+    {
+      "category": "generation",
+      "confidence": 1.0,
+      "evidence": {
+        "actual": "德",
+        "expected": "绍"
+      },
+      "message": "'G2' uses generation character '德', expected '绍'.",
+      "person_ids": [
+        "G2"
+      ],
+      "relationship_ids": [],
+      "rule_id": "ZP203",
+      "severity": "warning",
+      "source_location": null,
+      "suggestion": "Review the branch poem or generation field."
+    },
+    {
+      "category": "generation",
+      "confidence": 1.0,
+      "evidence": {},
+      "message": "Branch 'unconfigured' for 'G3' has no generation poem.",
+      "person_ids": [
+        "G3"
+      ],
+      "relationship_ids": [],
+      "rule_id": "ZP204",
+      "severity": "warning",
+      "source_location": null,
+      "suggestion": "Add its branch poem or correct the branch."
+    }
+  ],
+  "scan": {
+    "input": {
+      "format": "json",
+      "name": "invalid-generation.json",
+      "size": 700
+    },
+    "time": "2026-01-01T00:00:00+00:00"
+  },
+  "summary": {
+    "by_rule": {
+      "ZP201": 2,
+      "ZP202": 1,
+      "ZP203": 1,
+      "ZP204": 1
+    },
+    "by_severity": {
+      "warning": 5
+    },
+    "issues": 5,
+    "people": 3,
+    "relationships": 2
+  },
+  "version": "0.1.0"
+}

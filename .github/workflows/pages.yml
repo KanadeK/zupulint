@@ -1,0 +1,33 @@
+name: Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - run: uv sync --frozen --all-extras --dev
+      - run: uv run mkdocs build --strict
+      - run: |
+          mkdir -p site/examples site/schemas
+          cp schemas/*.json site/schemas/
+          uv run zupulint scan examples/valid/family.ged --format html --fail-on error --output site/examples/index.html
+          cp site/examples/index.html site/examples/valid-family.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
