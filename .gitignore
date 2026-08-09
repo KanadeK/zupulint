@@ -21,7 +21,7 @@ site/
 privacy.json
 privacy.sarif
 structure.json
-valid.json
+/valid.json
 wheel-sample/
 *.egg-info/
 *.tsbuildinfo

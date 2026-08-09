@@ -74,7 +74,7 @@ exclude = [
 ]
 
 [tool.pytest.ini_options]
-addopts = "-q --basetemp=.pytest-tmp/runtime --cov=zupulint --cov-branch --cov-report=term-missing --cov-report=json:coverage.json --cov-report=xml:coverage.xml --cov-fail-under=85"
+addopts = "-q --basetemp=.pytest-tmp --cov=zupulint --cov-branch --cov-report=term-missing --cov-report=json:coverage.json --cov-report=xml:coverage.xml --cov-fail-under=85"
 testpaths = ["tests"]
 
 [tool.coverage.run]

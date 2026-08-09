@@ -1,0 +1,65 @@
+{
+  "config": {
+    "chronology": {
+      "historical_people": [],
+      "maximum_lifespan": 130,
+      "maximum_maternal_age": 60,
+      "maximum_paternal_age": 90,
+      "minimum_parent_age": 12
+    },
+    "generation": {
+      "base_generation": 1,
+      "branch_generation_names": {
+        "main": [
+          "守",
+          "浩",
+          "绍",
+          "中",
+          "德",
+          "承",
+          "先",
+          "启",
+          "后",
+          "贤"
+        ]
+      },
+      "ignore_names": []
+    },
+    "important_claims_require_sources": false,
+    "locale": "zh-CN",
+    "privacy": {
+      "expose_contact_details": false,
+      "expose_exact_birth_date": false,
+      "living_person_year_threshold": 110,
+      "redact_living_people": true
+    },
+    "report": {
+      "include_evidence": true,
+      "include_info": true,
+      "include_suggestions": true
+    },
+    "rules": {
+      "disabled": [],
+      "enabled": true,
+      "severity": {}
+    },
+    "version": 1
+  },
+  "issues": [],
+  "scan": {
+    "input": {
+      "format": "ged",
+      "name": "family.ged",
+      "size": 1884
+    },
+    "time": "2026-01-01T00:00:00+00:00"
+  },
+  "summary": {
+    "by_rule": {},
+    "by_severity": {},
+    "issues": 0,
+    "people": 16,
+    "relationships": 24
+  },
+  "version": "0.1.0"
+}
